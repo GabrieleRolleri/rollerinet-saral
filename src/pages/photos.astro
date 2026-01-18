@@ -1,0 +1,277 @@
+---
+import Layout from "../layouts/BaseLayout.astro"; // Adjust this path if your Layout is elsewhere
+
+// 1. DEFINE YOUR PHOTOS HERE
+// You can add as many as you want.
+const photos = [
+  // --- PRE-FILLED PHOTOS ---
+  {
+    src: "/photos/_PHO2644.jpg",
+    title: "Hiking in the Alps",
+    date: "October 2023",
+    location: "Swiss Alps",
+    alt: "A snowy mountain peak"
+  },
+  {
+    src: "/photos/_PHO2650.jpg",
+    title: "Zurich at Night",
+    date: "December 2023",
+    location: "Zurich, Switzerland",
+    alt: "City lights reflecting in water"
+  },
+  {
+    src: "/photos/_PHO2685-Edit.jpg",
+    title: "Cryostat Setup",
+    date: "January 2024",
+    location: "Physics Lab",
+    alt: "Quantum computing equipment"
+  },
+
+  // --- NEW PHOTOS (With empty location placeholders) ---
+  { src: "/photos/Campo_di_grano.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/DSC_9788.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/DSC_9882.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/DSC_9952.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/IMG_20160710_181839.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/IMG_20160713_080922.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/IMG_20160826_145500.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/IMG_20160903_105613.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/IMG_20160903_111223.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/IMG_20160904_130955.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/Margherita_1.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/Margherita_2.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO2845.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO2943.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO3077.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO3118.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO3122.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO3126.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO3136.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO3185.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_0234.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_0576.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_0844.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_0883.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_1342.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_1461.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_2013.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_2030.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_2041.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_2046.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_2059.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_2353.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_2373.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/PHO_2380.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO2754.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO2774-3.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO3505.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO3546.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO3560.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO4504.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO4659.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO4673.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO5516.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO5518.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO5519.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO6367.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO7156.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO7350.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO7456.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO7731.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO7744.jpg", title: "", date: "", location: "", alt: "" },
+  { src: "/photos/_PHO7760.jpg", title: "", date: "", location: "", alt: "" }
+];
+---
+
+<Layout title="Photography | Gabriele Rolleri">
+  <main id="main-content">
+    <h1>Photography</h1>
+    <p>A collection of moments.</p>
+
+    <div class="photo-grid">
+      {photos.map((photo) => (
+        <div
+          class="photo-card"
+          onclick={`openModal('${photo.src}', '${photo.title}', '${photo.date}')`}
+        >
+          <img src={photo.src} alt={photo.alt} loading="lazy" />
+        </div>
+      ))}
+    </div>
+
+    <div id="imageModal" class="modal" onclick="closeModal()">
+      <span class="close">&times;</span>
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <img id="modalImg" src="" alt="">
+        <div class="modal-info">
+          <h2 id="modalTitle"></h2>
+          <p id="modalDate"></p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  #main-content {
+      max-width: 1200px; /* Limits how wide the page can get */
+      margin: 6rem auto;    /* Centers the container itself */
+      padding: 0 2rem;   /* Adds "breathing room" on the left and right */
+      width: 100%;
+    }
+  /* GRID STYLES */
+  .photo-grid {
+      /* Creates 3 columns by default */
+      column-count: 3;
+      column-gap: 1.5rem; /* Space between columns */
+      width: 100%;
+    }
+
+  .photo-card {
+    /* Prevents the browser from chopping an image in half between columns */
+    break-inside: avoid;
+    margin-bottom: 1.5rem; /* Space between images vertically */
+
+  /* REMOVED: aspect-ratio (so they keep natural shape) */
+  /* REMOVED: border-radius (so they have sharp corners) */
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: auto; /* Lets the height adjust naturally */
+    display: block;
+  }
+
+/* RESPONSIVE: Switch to 2 columns on tablets, 1 on phones */
+  @media (max-width: 900px) {
+    .photo-grid {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .photo-grid {
+      column-count: 1;
+    }
+  }
+  /* MODAL STYLES (The popup) */
+  /* MODAL STYLES */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.8); /* Slightly darker for focus */
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      /* FASTER ANIMATION (0.2s) */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .modal.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      text-align: center;
+      color: #1a1a1a;
+
+      /* PREVENT GLITCH: Start invisible, fade in only when ready */
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    /* Class to reveal content */
+    .modal-content.loaded {
+      opacity: 1;
+    }
+
+  .modal-content img {
+    max-height: 80vh;
+    max-width: 100%;
+    border-radius: 0px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  .modal-info {
+    margin-top: 1rem;
+  }
+
+  .modal-info h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  .modal-info p {
+    color: #555;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #000000;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+
+<script is:inline>
+  const modal = document.getElementById("imageModal");
+  // We need to grab the wrapper div, not just the image
+  const modalContent = document.querySelector(".modal-content");
+  const modalImg = document.getElementById("modalImg");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDate = document.getElementById("modalDate");
+
+  window.openModal = (src, title, date) => {
+    // 1. Reset: Hide the internal content immediately
+    modalContent.classList.remove("loaded");
+
+    // 2. Set the text
+    modalTitle.innerText = title;
+    modalDate.innerText = date;
+
+    // 3. Show the black background (Modal container)
+    modal.classList.add("show");
+
+    // 4. Start loading the image
+    modalImg.src = src;
+
+    // 5. When image is ready, show EVERYTHING (Image + Text) at once
+    modalImg.onload = () => {
+      modalContent.classList.add("loaded");
+    };
+  }
+
+  window.closeModal = () => {
+    modal.classList.remove("show");
+    // Optional: Reset content opacity quickly so it doesn't linger
+    setTimeout(() => {
+        modalContent.classList.remove("loaded");
+    }, 200);
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") closeModal();
+  });
+</script>

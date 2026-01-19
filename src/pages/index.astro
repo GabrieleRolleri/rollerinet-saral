@@ -6,69 +6,74 @@ import BlogCard from '../components/BlogCard.astro'
 import { getCollection } from 'astro:content'
 
 const posts = (await getCollection('blog'))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	.slice(0, 4)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 4)
 ---
 
 <BaseLayout>
-	<main
-		class="app-container flex flex-col gap-12 justify-center py-36 md:py-48 pt-44 md:pt-56 relative"
-	>
-		<div>
-			<h1 class="text-8xl font-bold leading-none">Gabriele Rolleri</h1>
-		</div>
-		<p class="text-2xl max-w-2xl font-light leading-normal">
-			Quantum Engineering -- Landscape Photography
-		</p>
-		<div class="flex flex-wrap gap-8">
-			{
-				SocialLinks.map((link) => (
-					<a
-						class="text-xl text-primary dark:text-primary-dark underline hover:underline underline-offset-4"
-						href={link.url}
-						target="_blank"
-					>
-						{link.name}
-					</a>
-				))
-			}
-		</div>
-	</main>
+    <main
+       class="app-container flex flex-col md:flex-row items-center gap-12 md:gap-24 py-36 md:py-48 pt-44 md:pt-56 relative"
+    >
+       <div class="flex flex-col gap-8 md:max-w-[60%]">
+          <div>
+             <h1 class="text-6xl md:text-8xl font-bold leading-none">Gabriele Rolleri</h1>
+          </div>
+          <p class="text-2xl max-w-2xl font-light leading-normal">
+             Quantum Engineering — Landscape Photography
+          </p>
+          <div class="flex flex-wrap gap-8">
+             {
+                SocialLinks.map((link) => (
+                   <a
+                      class="text-xl text-primary dark:text-primary-dark underline hover:underline underline-offset-4"
+                      href={link.url}
+                      target="_blank"
+                   >
+                      {link.name}
+                   </a>
+                ))
+             }
+          </div>
+       </div>
 
+       <div class="shrink-0">
+         <img
+            src="/me.jpg"
+            alt="Gabriele Rolleri Headshot"
+            class="w-48 h-48 md:w-64 md:h-64 rounded-2xl object-cover shadow-xl"
+          />
+       </div>
+    </main>
 
+    <section class="app-container py-42 grid lg:grid-cols-2 gap-28 lg:gap-10">
+       <div class="space-y-6">
+          <h2 class="section-title">About Me</h2>
+          <p class="text-lg max-w-xl pb-4">
+             Quantum Engineering student at ETH Zürich specializing in Quantum
+             Computing with Superconducting Circuits.
+          </p>
+          <a class="btn-secondary" href={`${SITE_BASE}/about`}
+             >Go to About
+             <Icon size={20} name="mdi:arrow-right" />
+          </a>
+       </div>
+       <div class="space-y-6">
+          <h2 class="section-title">Get in touch</h2>
 
-	<!-- Recent Posts Section -->
-	<section class="app-container py-42 grid lg:grid-cols-2 gap-28 lg:gap-10">
-		<div class="space-y-6">
-			<h2 class="section-title">About Me</h2>
-			<p class="text-lg max-w-xl pb-4">
-				Quantum Engineering student at ETH Zürich specializing in Quantum
-				Computing with Superconducting Circuits.
-			</p>
-			<a class="btn-secondary" href={`${SITE_BASE}/about`}
-				>Go to About
-				<Icon size={20} name="mdi:arrow-right" />
-			</a>
-		</div>
-		<div class="space-y-6">
-			<h2 class="section-title">Get in touch</h2>
-			<p class="text-lg max-w-xl">
-				Use the buttons below for my resume & email.
-			</p>
-			<div class="flex flex-wrap mt-auto space-x-4">
-				<a
-					class="btn-primary"
-					href="mailto:gabriele@irolleri.it"
-					download
-					target="_blank"
-					>Get in touch
-					<Icon height={20} name="mdi:email" />
-				</a>
-				<a class="btn-secondary" href="/Gabriele_Rolleri_CV.pdf" target="_blank"
-					>Download Resume
-					<Icon height={20} name="mdi:arrow-collapse-down" />
-				</a>
-			</div>
-		</div>
-	</section>
+          <div class="flex flex-wrap mt-auto space-x-4">
+             <a
+                class="btn-primary"
+                href="mailto:gabriele@irolleri.it"
+                download
+                target="_blank"
+                >Get in touch
+                <Icon height={20} name="mdi:email" />
+             </a>
+             <a class="btn-secondary" href="/Gabriele_Rolleri_CV.pdf" target="_blank"
+                >Download Resume
+                <Icon height={20} name="mdi:arrow-collapse-down" />
+             </a>
+          </div>
+       </div>
+    </section>
 </BaseLayout>
